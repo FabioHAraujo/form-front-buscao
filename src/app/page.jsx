@@ -1,7 +1,9 @@
+'use client'
+
 import { useState } from 'react';
 import PocketBase from "pocketbase";
 
-const pb = new PocketBase(import.meta.env.VITE_PB_URL);
+const pb = new PocketBase(process.env.NEXT_PUBLIC_PB_URL);
 
 function App() {
   const [nome, setNome] = useState("");
@@ -18,8 +20,8 @@ function App() {
 
     try {
       await pb.admins.authWithPassword(
-        import.meta.env.VITE_PB_USER,
-        import.meta.env.VITE_PB_PASS
+        process.env.NEXT_PUBLIC_PB_USER,
+        process.env.NEXT_PUBLIC_PB_PASS
       );
 
       const formData = new FormData();
@@ -45,7 +47,11 @@ function App() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="max-w-lg w-full bg-white shadow-lg rounded-2xl p-6 space-y-6">
         <h2 className="text-2xl font-bold text-gray-800 text-center">Adicionar Doguinho</h2>
-        <p className="text-gray-600 text-center">Envie até 20 fotos do seu doguinho para o banco de imagens do Buscão. Isso vai nos ajudar a construir uma aplicação que um dia pode te ajudar a achar o amiguinho de 4 patas.</p>
+        <p className="text-gray-600 text-center">
+          Envie até 20 fotos do seu doguinho para o banco de imagens do Buscão. 
+          Isso vai nos ajudar a construir uma aplicação que um dia pode te ajudar 
+          a achar o amiguinho de 4 patas.
+        </p>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
